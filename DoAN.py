@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkcalendar import DateEntry
 import mysql.connector
+import webbrowser
 def connect_db():
  return mysql.connector.connect(
  host="localhost",
@@ -17,7 +18,7 @@ else:
 # CREATE DATABASE qltuyendulich CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 # USE qltuyendulich;
 # CREATE TABLE tuyendulich (
-# matuyen INT PRIMARY KEY,
+#  INT PRIMARY KEY,
 # tentuyen VARCHAR(255),
 # diemkhoihanh VARCHAR(100),
 # diemden VARCHAR(100),
@@ -34,7 +35,7 @@ def center_window(win, w=700, h=500):
  win.geometry(f'{w}x{h}+{x}+{y}')
 # ====== Cửa sổ chính ======
 root = tk.Tk()
-root.title("Quản lý nhân viên")
+root.title("Quản lý Tuyến Du Lịch")
 center_window(root, 700, 500)
 root.resizable(False, False)
 # ====== Tiêu đề ======
@@ -45,18 +46,27 @@ frame_info = tk.Frame(root)
 frame_info.pack(pady=5, padx=10, fill="x")
 tk.Label(frame_info, text="Mã Tuyến Du Lịch").grid(row=0, column=0, padx=5, pady=5, 
 sticky="w")
-entry_maso = tk.Entry(frame_info, width=10)
-entry_maso.grid(row=0, column=1, padx=5, pady=5, sticky="w")
-tk.Label(frame_info, text="Chức vụ").grid(row=0, column=2, padx=5, pady=5, 
+entry_matuyen = tk.Entry(frame_info, width=10)
+entry_matuyen.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+tk.Label(frame_info, text="Tên Tuyến").grid(row=0, column=2, padx=5, pady=5, 
 sticky="w")
-cbb_chucvu = ttk.Combobox(frame_info, values=[
- "Trưởng phòng", "Phó phòng", "Nhân viên", "Kế toán", "Lái xe"
-], width=20)
-cbb_chucvu.grid(row=0, column=3, padx=5, pady=5, sticky="w")
-tk.Label(frame_info, text="Họ lót").grid(row=1, column=0, padx=5, pady=5, 
-sticky="w")
-entry_holot = tk.Entry(frame_info, width=25)
-entry_holot.grid(row=1, column=1, padx=5, pady=5, sticky="w")
+entry_tentuyen = tk.Entry(frame_info, width=30)
+entry_tentuyen.grid(row=0, column=3, padx=5, pady=5, sticky="w")
+#----------------------------------------
+tk.Label(frame_info, text="Điểm Khởi Hành").grid(row=1, column=0, padx=5, pady=5, sticky="w")
+entry_diemkhoihanh = tk.Entry(frame_info, width=25)
+entry_diemkhoihanh.grid(row=1, column=1, padx=5, pady=5, sticky="w")
+
+def open_map():
+    address = entry_diemkhoihanh.get()
+    if address:
+        url = f"https://www.google.com/maps/search/{address}"
+        webbrowser.open(url)
+    else:
+        messagebox.showwarning("Thông báo", "Vui lòng nhập địa chỉ điểm khởi hành!")
+
+btn_chon_diem = tk.Button(frame_info, text="Kiểm Tra Vị TRí", command=open_map)
+btn_chon_diem.grid(row=1, column=2, padx=5, pady=5, sticky="w")
 tk.Label(frame_info, text="Tên").grid(row=1, column=2, padx=5, pady=5, sticky="w")
 entry_ten = tk.Entry(frame_info, width=15)
 entry_ten.grid(row=1, column=3, padx=5, pady=5, sticky="w")
