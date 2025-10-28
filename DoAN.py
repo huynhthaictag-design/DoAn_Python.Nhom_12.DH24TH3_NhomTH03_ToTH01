@@ -4,23 +4,21 @@ from tkcalendar import DateEntry
 import mysql.connector
 import webbrowser
 def connect_db():
-    try:
-        return mysql.connector.connect(
-        host="localhost",
-        \
-        \\
-        
-        user='root',
-        password='1234',
-        database="qltuyendulich"
-    )
-    except Exception as e:
-        messagebox.showerror("DB Error", f"Không thể kết nối DB:\n{e}")
-        return None
+ return mysql.connector.connect(
+ host="localhost",
+ user='root',
+ password='1234', 
+ database="qltuyendulich"
+ )
+conn = connect_db()
+if conn.is_connected():
+    print("Kết nối thành công!")
+else:
+    print("Kết nối thất bại!")
 # CREATE DATABASE qltuyendulich CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 # USE qltuyendulich;
 # CREATE TABLE tuyendulich (
-#  INT PRIMARY KEY,
+# maso INT PRIMARY KEY,
 # tentuyen VARCHAR(255),
 # diemkhoihanh VARCHAR(100),
 # diemden VARCHAR(100),
