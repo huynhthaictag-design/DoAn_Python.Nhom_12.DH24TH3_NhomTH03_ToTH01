@@ -13,7 +13,7 @@ def connect_db():
             host="localhost",
             user='root',
             password='1234', 
-            database="qltuyendulich"
+            database="qltuyendulich"    
         )
         if conn.is_connected():
             return conn
@@ -24,10 +24,6 @@ def connect_db():
 
 # Attempt connection once
 conn = connect_db()
-if conn is None or not conn.is_connected():
-    print("Kết nối thất bại! Vui lòng kiểm tra MySQL.")
-
-# --- Utility Functions ---
 def center_window(win, w=850, h=700):
     """Căn giữa cửa sổ ứng dụng."""
     ws = win.winfo_screenwidth()
@@ -252,14 +248,24 @@ root.config(menu=menu)
 tab_control = ttk.Notebook(root)
 tab1 = ttk.Frame(tab_control)
 tab2 = ttk.Frame(tab_control)
+tab3 = ttk.Frame(tab_control)
 
 tab_control.add(tab1, text='Quản Lý Tuyến Du Lịch')
 tab_control.add(tab2, text='Chi tiết huóng dẫn viên')
-tab_control.pack(expand=1, fill='both')# =================================================================
+tab_control.add(tab3, text='Chi tiết các đia điểm')
+tab_control.pack(expand=1, fill='both')
+# =================================================================
+#                         tab3
+frame_title = tk.Frame(tab3, bg="#f2f6fc")
+frame_title.pack(fill="x", pady=12, padx=15)
+lbl_title = tk.Label(frame_title, text="QUẢN LÝ ĐỊA ĐIỂM DU LỊCH", font=("Arial", 20, "bold"), bg="#f2f6fc", fg="#2d5c88")
+lbl_title.pack(side="left")
+
+
 #                         TAB 1: QUẢN LÝ TUYẾN DU LỊCH 
 # =================================================================
 
-# --- Loại bỏ tiêu đề placeholder:
+
 # tk.Label(tab1, text="CHỨC NĂNG QUẢN LÝ TUYẾN DU LỊCH", font=("Arial", 16, "bold"), fg="gray").pack(pady=50)
 
 # 1. Chuyển frame_title từ root sang tab1
