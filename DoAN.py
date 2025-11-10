@@ -247,5 +247,3 @@ btn_clear = tk.Button(frame_btn, text="Clear", width=10, command=clear_input, bg
 btn_clear.pack(side="left", padx=7)
 
 # ====== Load dữ liệu ban đầu ======
-load_data()
-root.mainloop()

@@ -36,4 +36,3 @@ def check_db_connection(root_window):
         return False
     return True
 
-# Hướng dẫn: Đảm bảo bạn có bảng 'huongdanvien' và 'tuyendulich' trong CSDL 'qltuyendulich'.
